@@ -10,8 +10,14 @@ friend_favorites = [
     ["Carlie", ["nerds", "sour patch kids", "laffy taffy" ]]
 ]
 '''
-def get_friends_favorite_candy_count(favorites):
-    pass
+def get_friends_favorite_candy_count(friend_favorites):
+    friend_favorite_candy_dict = {}
+    
+    for friend in friend_favorites:
+        for candy in friend[1]:
+            friend_favorite_candy_dict[candy] = friend_favorite_candy_dict.get(candy,0) +1
+    return friend_favorite_candy_dict
+    
 
 '''
 2. 
@@ -26,16 +32,32 @@ friend_favorites = [
     ["Carlie", ["nerds", "sour patch kids", "laffy taffy" ]]
 ]
 '''
-def create_new_candy_data_structure(data):
-    pass 
+def create_new_candy_data_structure(friend_favorites):
+    candy_dict = {}
+
+    for friend in friend_favorites:
+        for candy in friend[1]:
+            if candy in candy_dict:
+                candy_dict[candy].append(friend[0])
+            else:
+                candy_dict[candy] = [friend[0]]
+    return candy_dict
+    
 
 '''
 3. 
 In `get_friends_who_like_specified_candy()`, return a tuple of 
 friends who like the candy specified in the candy_name parameter.
 '''
-def get_friends_who_like_specific_candy(data, candy_name):
-    pass
+def get_friends_who_like_specific_candy(friend_favorites, candy_name):
+    candy_dict = create_new_candy_data_structure(friend_favorites)
+    if candy_dict:
+        friend_list = candy_dict[candy_name]
+        return tuple(friend_list)
+    else:
+        return None
+
+
 
 '''
 4. 
@@ -43,7 +65,10 @@ In, `create_candy_set()`, return a set of all the candies from
 the data structure made in `create_new_candy_data_structure()`.
 '''
 def create_candy_set(data):
-    pass 
+    candy_dict = create_new_candy_data_structure(data)
+    print(candy_dict.keys())
+    print(set(candy_dict.keys()))
+    return set(candy_dict.keys()) 
 
 '''
 5. 
